@@ -1,20 +1,15 @@
 class Solution {
     public int arrangeCoins(int n) {
-        int i=1;
-        int res=0;
-        if(n==1)
-        return 1;
-        while(n>=i)
+        long left=0;
+        long right=n;
+        while(left<=right)
         {
-            
-            while(n>=i)
-            {
-                n=n-i;
-                res++;
-                i++;
-            }
-            
+            long mid=left+(right-left)/2;
+            if(n>=(mid*(mid+1)/2))
+                left=mid+1;
+            else
+                right=mid-1;
         }
-        return res;
+        return (int)left-1;
     }
 }
