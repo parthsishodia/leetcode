@@ -1,16 +1,21 @@
 public class Solution {
     public int countPrimes(int n) {
-        boolean[] notPrime = new boolean[n];
-        int count = 0;
-        for (int i = 2; i < n; i++) {
-            if (notPrime[i] == false) {
-                count++;
-                for (int j = 2; i*j < n; j++) {
-                    notPrime[i*j] = true;
-                }
-            }
-        }
-        
-        return count;
+        int res = 0;
+	    boolean[] used = new boolean[n];
+	    for (int i = 2; i <= Math.sqrt(n); i++) {
+		 if (!used[i - 1]) {
+			int temp = i * i;
+			while (temp < n) {
+			    used[temp - 1] = true;
+			    temp += i;
+			}
+		}
+	    }
+	    for (int i = 2; i < n; i++) {
+		if (!used[i - 1]) {
+		    res++;
+		}
+	    }
+	    return res;
     }
 }
